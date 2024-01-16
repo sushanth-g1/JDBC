@@ -1,0 +1,46 @@
+Downloaded my sql jdbc driver and added to the external libraries
+
+Connection interface: represents a connection to a database. It provides methods for creating Statement objects, committing transactions, and managing connections.
+
+    Connection.createStatement()    : Creates a Statement object for sending SQL statements to the database.
+                                      It is generally used for executing static, non-parameterized SQL queries and statements.
+
+    Connection.prepareStatement()   : Creates a PreparedStatement object for sending SQL statements to the database.
+                                      The PreparedStatement interface is specifically designed for executing parameterized SQL queries.
+
+                                      ex : In the line preparedStatement.setString(1,parameterValue);, the 1 refers to the parameter index. In JDBC, parameter indexes are 1-based, meaning they start from 1, not 0.
+                                           UPDATE your_table SET column1 = ?, column2 = ? WHERE id = ?
+                                           preparedStatement.setString(1, value1); for the first parameter.
+                                           preparedStatement.setString(2, value2); for the second parameter.
+                                           preparedStatement.setInt(3, idValue); for the third parameter.
+
+There are three types of statements in JDBC: Statement, PreparedStatement, and CallableStatement.
+
+Statement interface                 : The Statement interface is used for executing SQL statements.
+                                      Statement.execute(sql): Executes a SQL statement that may return multiple results.
+
+                                      ex : ResultSet executeQuery(String sql) throws SQLException;
+                                           int executeUpdate(String sql) throws SQLException;
+                                           int getMaxRows() throws SQLException;
+
+PreparedStatement interface        : interface PreparedStatement extends Statement
+                                     The PreparedStatement interface in Java JDBC is a subinterface of the Statement interface.
+                                     It is used to execute precompiled SQL queries with placeholders for parameters.
+                                     PreparedStatement is beneficial for several reasons,
+                                     including improving performance and helping to prevent SQL injection attacks.
+
+                                     ex : void setArray (int parameterIndex, Array x) throws SQLException;
+                                          void setNull(int parameterIndex, int sqlType) throws SQLException;
+                                          int executeUpdate() throws SQLException;
+
+ResultSet interface                : The ResultSet interface represents the result set of a query.
+                                     It provides methods for retrieving data from the result set.
+                                     ResultSet.next(): Moves the cursor to the next row in the result set.
+
+
+************* The actual implementation of the Connection interface is provided by database-specific JDBC drivers. *************
+************* The JDBC driver you're using (e.g., MySQL driver, PostgreSQL driver) is a class provided by the database vendor that implements the Connection interface. *************
+
+Source Info :
+https://www.youtube.com/watch?v=7v2OnUti2eM
+Chat GPT
